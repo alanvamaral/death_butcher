@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 enum MeatState { good, almostExpired, expired }
 
 enum MeatType { beef, pork, chicken, fish, other }
@@ -51,6 +53,17 @@ class Meat {
         return 'Quase vencendo';
       case MeatState.expired:
         return 'Vencido';
+    }
+  }
+
+  Color getStateColor() {
+    switch (state) {
+      case MeatState.expired:
+        return Colors.red[700]!;
+      case MeatState.almostExpired:
+        return Colors.orange[700]!;
+      case MeatState.good:
+        return Colors.green[700]!;
     }
   }
 

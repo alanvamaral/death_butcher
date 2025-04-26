@@ -62,10 +62,7 @@ class _FloatingButtonWidget extends StatelessWidget {
           height: 30,
           width: 30,
           'assets/icons/meat.svg',
-          colorFilter: ColorFilter.mode(
-            Colors.white,
-            BlendMode.srcIn,
-          ),
+          colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
         onPressed: () {
           if (viewModel.value is SuccessMeatState) {
@@ -76,10 +73,8 @@ class _FloatingButtonWidget extends StatelessWidget {
             } else {
               id = 1;
             }
-            Navigator.pushNamed(context, '/add_meat', arguments: {
-              int: id,
-              Freezer: freezer,
-            });
+            Navigator.pushNamed(context, '/add_meat',
+                arguments: {int: id, Freezer: freezer});
           }
         });
   }
@@ -90,17 +85,6 @@ class _MeatCard extends StatelessWidget {
 
   final Meat meat;
   final void Function() onLongPress;
-
-  Color _getStateColor() {
-    switch (meat.state) {
-      case MeatState.expired:
-        return Colors.red[700]!;
-      case MeatState.almostExpired:
-        return Colors.orange[700]!;
-      case MeatState.good:
-        return Colors.green[700]!;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +100,8 @@ class _MeatCard extends StatelessWidget {
             height: 46,
             width: 46,
             'assets/icons/meat.svg',
-            colorFilter: ColorFilter.mode(
-              _getStateColor(),
-              BlendMode.srcIn,
-            ),
+            colorFilter:
+                ColorFilter.mode(meat.getStateColor(), BlendMode.srcIn),
           ),
           title: Text(
             meat.name,
@@ -143,7 +125,8 @@ class _MeatCard extends StatelessWidget {
                     TextSpan(
                       text: meat.getStateString(),
                       style: TextStyle(
-                          color: _getStateColor(), fontWeight: FontWeight.bold),
+                          color: meat.getStateColor(),
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
